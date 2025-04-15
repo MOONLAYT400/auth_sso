@@ -36,8 +36,11 @@ type AppProvider interface {
 	App(ctx context.Context, appId int) (models.App, error)
 }
 
-var ErrInvalidCredentials = errors.New("invalid credentials")
-
+var (
+	ErrInvalidCredentials = errors.New("invalid credentials")
+	ErrInvalidAppId = errors.New("invalid app id")
+	ErrUserExists = errors.New("user already exists")
+)
 
 // New returns a new instance of Auth.
 // tokenTTL is the time to live for login tokens.
@@ -78,6 +81,9 @@ func (a *Auth) Login(ctx context.Context, email,password string, appId int) (str
 
 	app, err := a.appProvider.App(ctx,appId)
 	if err != nil {
+			if errors.Is(err, storage.ErrAppNotFound) {
+				return "", fmt.Errorf("%s: %w", op, ErrInvalidCredentials)
+		  }
 		log.Error("Failed to get app",slog.String("error",err.Error()))
 
 		return "", fmt.Errorf("%s: %w", op, ErrInvalidCredentials)
@@ -109,6 +115,11 @@ func (a *Auth) RegisterUser(ctx context.Context,email,password string) (userId i
 
 	uid, err := a.userSaver.SaveUser(ctx,email, hashPass)
 	if err != nil {
+		if errors.Is(err, storage.ErrUserExists) {
+			return 0, fmt.Errorf("%s: %w", op, ErrUserExists)
+		}
+
+
 		log.Error("Failed to save user",slog.String("error",err.Error()))
 
 		return 0, fmt.Errorf("%s: %w", op, err)
