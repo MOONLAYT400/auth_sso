@@ -6,6 +6,7 @@ require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/MOONLAYT400/Proto_sso v0.0.0-20250415161548-20b1f55aaea5 // indirect
 	github.com/brianvoe/gofakeit/v6 v6.28.0 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
 	github.com/golang-migrate/migrate/v4 v4.18.2 // indirect
@@ -18,6 +19,7 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-sqlite3 v1.14.27 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/testify v1.10.0 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	golang.org/x/crypto v0.37.0 // indirect
