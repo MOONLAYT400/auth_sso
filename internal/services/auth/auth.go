@@ -101,7 +101,7 @@ func (a *Auth) Login(ctx context.Context, email,password string, appId int) (str
 
 // RegisterUser creates a new user with the given email and password.
 // It returns the user ID of the newly created user or an error if the registration fails.
-func (a *Auth) RegisterUser(ctx context.Context,email,password string) (userId int, err error) {
+func (a *Auth) Register(ctx context.Context,email,password string) (userId int, err error) {
 	const op = "auth.RegisterUser"
 
 	log := a.log.With(slog.String("op", op))
